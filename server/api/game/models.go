@@ -1,5 +1,10 @@
 package game
 
+import (
+	"github.com/Pallinder/go-randomdata"
+	"strings"
+)
+
 type GameStatus string
 type CellStatus string
 
@@ -28,4 +33,12 @@ type Game struct {
 	Name    string     `json:"name"`
 	Status  GameStatus `json:"status"`
 	Board   [][]Cell   `json:"board"`
+}
+
+func NewGame() Game {
+	newGame := Game{}
+	newGame.Name = strings.ToLower(randomdata.SillyName())
+	newGame.Status = Playing
+
+	return newGame
 }
