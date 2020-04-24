@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
 import Board from "./component/board";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -91,10 +90,6 @@ function App() {
     mines: DEFAULT_MINES,
     name: "",
   });
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = (value) => {
     setOpen(false);
