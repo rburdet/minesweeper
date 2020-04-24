@@ -11,7 +11,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 const URL = "https://rburdet-minesweeper-api.herokuapp.com/api";
-// const URL = "http://localhost:8080/api";
 
 const gameUrl = `${URL}/game`;
 
