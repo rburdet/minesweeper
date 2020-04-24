@@ -101,10 +101,14 @@ func (g *Game) floodFill(i int, j int) {
 		}
 		cell.IsClicked = true
 		if cell.AdjacentMines == 0 {
-			g.floodFill(i, j-1)
-			g.floodFill(i, j+1)
-			g.floodFill(i+1, j)
 			g.floodFill(i-1, j)
+			g.floodFill(i-1, j-1)
+			g.floodFill(i+1, j)
+			g.floodFill(i+1, j+1)
+			g.floodFill(i, j-1)
+			g.floodFill(i+1, j-1)
+			g.floodFill(i, j+1)
+			g.floodFill(i-1, j+1)
 		} else {
 			return
 		}
