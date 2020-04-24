@@ -3,14 +3,13 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Cell from "./cell";
+import { URL } from "./constants";
 
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
 }));
-
-const URL = "https://rburdet-minesweeper-api.herokuapp.com/api";
 
 const gameUrl = `${URL}/game`;
 
@@ -41,10 +40,10 @@ function Board({ mines, columns, rows, name }) {
           if (boardData) setBoard(boardData);
         } catch (e) {
           await createBoard(boardName);
-          await  getBoard()
+          await getBoard();
         }
       } else {
-        await createBoard()
+        await createBoard();
       }
     };
     getBoard();
@@ -58,8 +57,8 @@ function Board({ mines, columns, rows, name }) {
     });
     if (data.status !== "playing") {
       alert(data.status);
-      setBoard()
-      setBoardName()
+      setBoard();
+      setBoardName();
     } else setBoard(data);
   };
 

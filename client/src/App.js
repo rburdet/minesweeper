@@ -7,10 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
 import TextField from "@material-ui/core/TextField";
-
-const DEFAULT_ROWS = 8;
-const DEFAULT_COLUMNS = 8;
-const DEFAULT_MINES = 10;
+import { DEFAULT_ROWS, DEFAULT_COLUMNS, DEFAULT_MINES } from "./constants";
 
 function ParametersDialog({ settedValues, open, onClose }) {
   const [values, setValues] = useState(settedValues);
