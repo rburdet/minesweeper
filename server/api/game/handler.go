@@ -45,6 +45,11 @@ func (gh *GameHandler) GetGame(c *gin.Context) {
 	name := c.Param("name")
 	savedGame := gh.service.GetGame(name)
 
+	if savedGame.Name == "" {
+		c.Status(http.StatusNotFound)
+		return
+	}
+
 	c.JSON(http.StatusOK, savedGame)
 }
 

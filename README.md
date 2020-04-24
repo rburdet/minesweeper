@@ -1,22 +1,29 @@
-# Disclaimers
+# Minesweeper
 
-I must admit that i cheat in the time, in my free times, like when i was having lunch or having a bath i thought of the main structures, the most difficult algorithms, and the architecture overall, that time helped me to get the hands on the code much faster and with the idea ready on my head, of course it had a lot of tweaks, but the most important building blocks were already designed. 
+Hey, this is my implemenation of the challenge deviget proposed. It consists on a backend developed in golang and now deployed in [heroku](https://rburdet-minesweeper-api.herokuapp.com/api) and on a client, based on CRA, deployed on [now](https://minesweeper-pink.now.sh/). 
+
+## Project structure
+- [Client](#/client) Has all information related to the client project
+- [Server](#/server) Talks about the server, the api documentation is also in its readme
+
+## Disclaimers
+
+I must admit that i cheat in the time, in my free times, i thought about the main structures, the most difficult algorithms, and the architecture overall, that time helped me to get the hands on the code much faster and with the idea ready on my head, of course it had a lot of tweaks, but the most important building blocks were already designed. 
 
 I've also used as a base another challenge i had solved for cabify (you can find it [here](https://gitlab.com/rburdet/cabify)) and tried to improve some parts, like being nearer to a CLEAN architecture, or using _gin_ instead of _echo_ 
-#Assumptions
 
-- Code has a lot of boilerplate to show the use of DI, and how easy could be to change one implementation to other
-- Thanks to DI, service and repositories are easily testable, because of the time constraints i wont implement tests for any of them.
-- Random name creation could have a lot of collisions, for massive usage i would use another random generation technique
-- For security reasons, number of adjancetMines shouldnt be sent for all the board but for those the click operation opened, for time constraints i couldnt get it done
-- In memory data base is certainly not the best approach, im using a dictionary with an instance and not a pointer to keep the references. Im doing this because it let me debug easier, and to make refresh flow similar to a non relational db like mongo.
-- Im not using default values on the server and the max and mins are handled by go struct binding reflection 
-- Error responses should be handled in a more sophisticated way as they are being hardcoded. Again, this is a time restriction
-- More testing are needed on the sum adjacents and click algorithms
-- Client is not handling error codes efficiently
+## Assumptions
 
-# Libaries
+You'll find project related assumptions in their folders. Overall, i think the time given to this challenge its not enough and many things should be avoided
 
-- [Http framework](https://github.com/gin-gonic/gin)
-- [For cors](https://github.com/gin-contrib/cors)
-- [Random generator](https://github.com/Pallinder/go-randomdata)
+*[x] Design and implement a documented RESTful API for the game (think of a mobile app for your API)
+*[x] Implement an API client library for the API designed above. Ideally, in a different language, of your preference, to the one used for the API
+*[x] When a cell with no adjacent mines is revealed, all adjacent squares will be revealed (and repeat)
+*[x] Ability to 'flag' a cell with a question mark or red flag (only on the backend)
+*[x] Detect when game is over 
+*[x] Persistence (Its a dictionary on the server)
+*[ ] Time tracking
+*[x] Ability to start a new game and preserve/resume the old ones
+*[x] Ability to select the game parameters: number of rows, columns, and mines
+*[ ] Ability to support multiple users/accounts
+
