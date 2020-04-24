@@ -1,3 +1,5 @@
+package game
+
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -21,6 +23,11 @@ func (gh *GameHandler) CreateGame(c *gin.Context) {
 	newGame := NewGame()
 	if err := c.ShouldBindJSON(&newGame); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if newGame.Rows*newGame.Columns < newGame.Mines {
+		c.JSON(http.StatusForbidden, gin.H{"error": "too many mines for that board size"})
 		return
 	}
 
