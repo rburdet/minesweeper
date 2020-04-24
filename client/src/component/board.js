@@ -58,6 +58,8 @@ function Board({ mines, columns, rows, name }) {
     });
     if (data.status !== "playing") {
       alert(data.status);
+      setBoard()
+      setBoardName()
     } else setBoard(data);
   };
 
