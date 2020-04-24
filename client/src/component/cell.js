@@ -25,10 +25,13 @@ function Cell({ i, j, onClick, cell }) {
   const classes = useStyles();
   const [clicked, setClicked] = useState(false);
 
-  const cellClick = () => {
-    setClicked(true);
-
-    onClick(i, j);
+  const cellClick = (action) => {
+    if (!action) setClicked(true);
+    if (action === "flag" && cell.status === "flag") {
+      onClick(i, j, "clean");
+    } else {
+      onClick(i, j, action);
+    }
   };
 
   const openedCell = () => (
@@ -39,16 +42,34 @@ function Cell({ i, j, onClick, cell }) {
 
   const closedCell = () => (
     <div
-      onClick={cellClick}
+      onClick={() => cellClick()}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        cellClick("flag");
+        return false;
+      }}
       key={i * j}
       className={classes.cell}
+    ></div>
+  );
+
+  const flaggedCell = () => (
+    <div
+      key={i * j}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        cellClick("flag");
+        return false;
+      }}
+      className={classes.cell}
     >
+      🚩
     </div>
   );
 
-
+  if (cell.status === "flag") return flaggedCell();
   if (cell.clicked || clicked) return openedCell();
-  else return closedCell();
+  return closedCell();
 }
 
 export default Cell;

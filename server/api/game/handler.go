@@ -8,7 +8,7 @@ import (
 type ClickAction struct {
 	I      int
 	J      int
-	Action string `binding:oneof="flag question"`
+	Action string `binding:oneof="flag question clean"`
 }
 
 type GameHandler struct {

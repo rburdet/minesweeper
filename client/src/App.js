@@ -66,8 +66,8 @@ function ParametersDialog({ settedValues, open, onClose }) {
           autoFocus
           margin="dense"
           name="name"
-          label="name"
-          helperText="You can recover your name with this name!"
+          label="Game name"
+          helperText="You can recover your game with this name! - There cant be 2 games with the same name"
           fullWidth
           onChange={handleInputChange}
           value={values.name}

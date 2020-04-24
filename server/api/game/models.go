@@ -136,7 +136,9 @@ func (g *Game) checkGameEnded() {
 
 func (g *Game) Click(i int, j int, action string) {
 	cell := &g.Board[i][j]
-	if action == "flag" {
+	if action == "clean" {
+		cell.Status = ""
+	} else if action == "flag" {
 		cell.Status = Flag
 	} else if action == "question" {
 		cell.Status = QuestionMark

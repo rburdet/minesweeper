@@ -8,7 +8,7 @@ Hey, this is my implemenation of the challenge deviget proposed. It consists on 
 
 ## Disclaimers
 
-I must admit that i cheat in the time, in my free times, i thought about the main structures, the most difficult algorithms, and the architecture overall, that time helped me to get the hands on the code much faster and with the idea ready on my head, of course it had a lot of tweaks, but the most important building blocks were already designed. 
+I must admit that i cheated on the time, when i had any free time, i thought about the main structures, the most difficult algorithms, and the architecture overall, that time helped me to get the hands on the code much faster and with the idea ready on my head, of course it had a lot of tweaks, but the most important building blocks were already designed. 
 
 I've also used as a base another challenge i had solved for cabify (you can find it [here](https://gitlab.com/rburdet/cabify)) and tried to improve some parts, like being nearer to a CLEAN architecture, or using _gin_ instead of _echo_ 
 

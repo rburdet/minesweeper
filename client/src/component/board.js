@@ -18,37 +18,36 @@ function Board({ mines, columns, rows, name }) {
   const classes = useStyles();
   const [boardName, setBoardName] = useState(name);
   const [board, setBoard] = useState();
-  const [finished, setFinished] = useState(false);
   const gameParameters = {
     rows: +rows,
     columns: +columns,
     mines: +mines,
-  }
-
-  const restart = () => {
-    setFinished(true);
-    setFinished(false);
-    setBoard();
   };
 
-  const createBoard = async () => {
+  const createBoard = async (name) => {
     const {
       data: { id },
-    } = await axios.post(gameUrl, gameParameters);
+    } = await axios.post(gameUrl, { ...gameParameters, name });
     setBoardName(id);
   };
 
   useEffect(() => {
-    if (!finished && !boardName) createBoard();
-  }, [finished]);
-
-  useEffect(() => {
     const getBoard = async () => {
-      const { data } = await axios.get(`${gameUrl}/${boardName}`);
-      if (!data) await createBoard()
-      setBoard(data);
+      if (boardName) {
+        try {
+          const { data: boardData } = await axios.get(
+            `${gameUrl}/${boardName}`
+          );
+          if (boardData) setBoard(boardData);
+        } catch (e) {
+          await createBoard(boardName);
+          await  getBoard()
+        }
+      } else {
+        await createBoard()
+      }
     };
-    if (boardName) getBoard();
+    getBoard();
   }, [boardName]);
 
   const onClick = async (i, j, action) => {
@@ -59,7 +58,6 @@ function Board({ mines, columns, rows, name }) {
     });
     if (data.status !== "playing") {
       alert(data.status);
-      restart();
     } else setBoard(data);
   };
 
