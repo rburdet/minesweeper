@@ -47,3 +47,23 @@ func (gh *GameHandler) GetGame(c *gin.Context) {
 
 	c.JSON(http.StatusOK, savedGame)
 }
+
+func (gh *GameHandler) Click(c *gin.Context) {
+	var click ClickAction
+	if err := c.ShouldBindJSON(&click); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	name := c.Param("name")
+
+	savedGame := gh.service.GetGame(name)
+	if savedGame.Status != Playing {
+		c.JSON(http.StatusForbidden, gin.H{"error": "game is over"})
+
+		return
+	}
+	savedGame.Click(click.I, click.J, click.Action)
+	gh.service.SaveGame(savedGame)
+
+	c.JSON(http.StatusOK, savedGame)
+}

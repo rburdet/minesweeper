@@ -92,3 +92,57 @@ func (g *Game) fillBoard() {
 		}
 	}
 }
+
+func (g *Game) floodFill(i int, j int) {
+	if i >= 0 && j >= 0 && i < g.Rows && j < g.Columns {
+		cell := &g.Board[i][j]
+		if cell.IsClicked {
+			return
+		}
+		cell.IsClicked = true
+		if cell.AdjacentMines == 0 {
+			g.floodFill(i, j-1)
+			g.floodFill(i, j+1)
+			g.floodFill(i+1, j)
+			g.floodFill(i-1, j)
+		} else {
+			return
+		}
+	}
+}
+
+func (g *Game) checkGameEnded() {
+	var notOpenedCells int
+	var discoveredMines int
+	for i := 0; i < g.Rows; i++ {
+		for j := 0; j < g.Columns; j++ {
+			cell := g.Board[i][j]
+			if !cell.IsClicked {
+				notOpenedCells++
+			}
+			if cell.Status == Flag && cell.HasMine {
+				discoveredMines++
+			}
+		}
+	}
+	if notOpenedCells == g.Mines || discoveredMines == g.Mines {
+		g.Status = Won
+	}
+}
+
+func (g *Game) Click(i int, j int, action string) {
+	cell := &g.Board[i][j]
+	if action == "flag" {
+		cell.Status = Flag
+	} else if action == "question" {
+		cell.Status = QuestionMark
+	} else {
+		if cell.HasMine {
+			g.Status = Lost
+			return
+		}
+		g.floodFill(i, j)
+	}
+
+	g.checkGameEnded()
+}
